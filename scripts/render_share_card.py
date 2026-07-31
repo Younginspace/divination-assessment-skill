@@ -195,8 +195,14 @@ def relationship_spec(payload: dict[str, Any]) -> dict[str, Any]:
 def oracle_spec(payload: dict[str, Any]) -> dict[str, Any]:
     result = payload["result"]
     card = result["card"]
-    orientation = ORIENTATION_LABELS.get(result.get("orientation"), "方向未标注")
-    highlights = public_observations(payload, limit=2)
+    orientation_key = result.get("orientation")
+    orientation = ORIENTATION_LABELS.get(orientation_key, "方向未标注")
+    meaning = safe_dynamic_text(card.get("archetype_zh"), limit=76)
+    lens = safe_dynamic_text(card.get(f"{orientation_key}_lens_zh"), limit=76)
+    highlights = [item for item in (meaning, lens) if item]
+    highlights.extend(
+        item for item in public_actions(payload, limit=1) if item not in highlights
+    )
     if not highlights:
         highlights = ["把这张牌当作一个联想镜头：它让你想到什么？"]
     return {
@@ -205,7 +211,7 @@ def oracle_spec(payload: dict[str, Any]) -> dict[str, Any]:
         "title": "我抽到的反思卡",
         "hero": f"{card.get('name_zh', '')} · {orientation}",
         "stats": [],
-        "highlights": highlights,
+        "highlights": highlights[:3],
         "footer": "随机联想与自我反思｜不预测外部事件",
         "companion_text": TRADITIONAL_DISCLAIMER,
     }

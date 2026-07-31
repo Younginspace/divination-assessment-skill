@@ -41,14 +41,14 @@
       "motif": "paired-arcs"
     },
     "oracle": {
-      "name_zh": "夜色反思",
-      "background_start": "#15172C",
-      "background_end": "#303056",
-      "ink": "#FFF8E8",
-      "muted": "#C9C4D8",
-      "accent": "#E8B763",
-      "accent_soft": "#353653",
-      "panel": "#22243D",
+      "name_zh": "静夜金线",
+      "background_start": "#111426",
+      "background_end": "#26294A",
+      "ink": "#F1EBDD",
+      "muted": "#C7C2D4",
+      "accent": "#D6A653",
+      "accent_soft": "#343653",
+      "panel": "#1D2038",
       "motif": "stars"
     },
     "bazi": {

@@ -31,15 +31,39 @@ python3 scripts/validate_share_card.py \
 
 ### B. 图片模型氛围版，可选
 
-只有用户明确想要“更有氛围、插画感更强”的版本且宿主提供 `image_generation@v1.0` 时才使用。以已校验 `share-card.json` 为唯一文字来源：
+只有用户明确想要“更有氛围、插画感更强”的版本且宿主提供 `image_generation@v1.0` 时才使用。支持两种 render pass：
 
-1. 把 `exact_text` 逐项列入提示词，不让模型总结或改写；
-2. 明确 `do not include` 隐私、Logo、认证、预测和新结论；
-3. 生成一次并核对关键文字；
-4. 关键文字错误只重试一次；
-5. 第二次仍错误时不交付错误图片，回退到确定性 SVG。
+- `text-free-background`：生产默认。图片模型只生成背景，关键中文由已校验 SVG/spec 排版；
+- `framed-preview`：用户明确要完整塔罗牌预览时使用。图片模型可生成牌框、牌号、双语牌名和正逆位关键词，但不能取代正式确定性文字层。
 
-图片模型不是默认排版引擎，也不能替代 SVG/spec 校验。
+1. 先生成并校验 `share-card.json` 与 `share-card.svg`；
+2. 抽牌卡运行：
+
+   ```bash
+   python3 scripts/build_share_card_image_prompt.py \
+     <run_dir>/final.json \
+     --output <run_dir>/image-prompt.json
+   ```
+
+3. 把 `image-prompt.json.prompt` 与 `negative_prompt` 交给图片模型，只生成 `render_pass=text-free-background`；
+4. 检查背景没有文字、Logo、真人身份、灾祸写实或新增结论；
+5. 宿主将 `share-card.svg` 的确定性文字层叠加到背景，保持 `exact_text` 逐字不变；
+6. 宿主暂不支持图层合成时，分别交付氛围背景与已校验 SVG，不让图片模型代写中文。
+
+完整牌面预览追加：
+
+```bash
+python3 scripts/build_share_card_image_prompt.py \
+  <run_dir>/final.json \
+  --render-pass framed-preview \
+  --output <run_dir>/framed-preview-prompt.json
+```
+
+预览严格遵循 `frame_system`：4.5% 内缩金色双线框、克制切角、单层内拱门、少量月相和星点；顶部依次放牌号、中文牌名、英文名，底部只放正逆位与两个关键词。必须逐项核对 `preview_exact_text`；任一关键字错误、重复或出现伪文字都不交付，改走默认无字背景路径。
+
+视觉规范固定在 `assets/immersive-card-visual-system.json`：3:4 画布、顶部和底部文字安全区、深靛/月白/仪式金配色、当代编辑插画、单一核心母题、匿名人物，以及可选的完整牌框系统。22 张牌的具体场景只从已校验 `result.card.visual_symbols_zh` 与对应正逆位牌义派生。
+
+图片模型不是排版引擎，也不能替代 SVG/spec 校验。
 
 ## 默认隐私规则
 
@@ -95,13 +119,13 @@ python3 scripts/validate_share_card.py \
 ## 图片模型提示词骨架
 
 ```text
-生成一张中文分享卡。气质轻盈、当代、克制、有留白，不像证书或算命广告。
-
-Exact text（逐字呈现，不增删改写）：
-[复制 share-card.json 的 exact_text]
-
-Do not include：
-- 出生日期、时间、地点、经纬度、姓名、手机号、run_id；
-- 元宝名称或 Logo、官方认证、准确率、匹配率、预测、吉凶；
-- 任何未出现在 share-card.json 中的新结论。
+为一张中文抽牌反思卡生成无字背景插画。只生成背景艺术，不渲染任何文字。
+视觉系统：静夜金线 Quiet Arcana。
+牌面主题：[result.card.name_zh] · [正/逆位]。
+核心母题：[result.card.archetype_zh]
+本次方向：[result.card.upright_lens_zh 或 reversed_lens_zh]
+原创场景象征：[result.card.visual_symbols_zh]
+顶部 0%—19% 与底部 73%—100% 保持低细节负空间；中部只放一个主角或核心象征。
+深靛蓝为主，月白与仪式金点亮；当代编辑插画、水粉、纸张纤维、柔和体积光。
+严禁文字、伪文字、Logo、水印、证书、算命广告、商业牌组复刻、真人面孔和新增结论。
 ```

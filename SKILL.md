@@ -115,7 +115,7 @@ description: 面向中国用户，将原创四字母性格偏好快测、Mini-IP
      3. **行动层**：低成本、可逆、用户可拒绝的观察或沟通建议。
    - 人格结果首屏直接展示四字母偏好代码和四轴选择占比，例如 `INFP｜I 67% · N 67% · F 67% · P 67%`。百分比只表示本轴 3 道 A/B 选择的占比，不是人口百分位、准确率或统计置信度。
    - 进一步偏好不能只展示 `Fi → Ne → Si → Te`。先展示脚本返回的 `plain_sequence_zh`，例如“确认自己是否真心认可 → 探索还有哪些可能 → 用过往经验核对细节 → 用计划和标准推动落地”；再按需把缩写放在括号中，并用 `stack[].plain_explanation_zh` 逐项解释。紧邻说明“由四字母偏好代号推导，未单独测量”。
-   - 抽牌只作为联想镜头，给 2—4 个反思问题和一个可逆行动，不预测外部事件。
+   - 抽牌先展示 `result.card.archetype_zh` 的通用母题，再展示与正逆位对应的 `upright_lens_zh|reversed_lens_zh`，最后才结合用户问题说明“为什么可能有关”。不得只报牌名就跳到行动建议。`quick` 给一句结论、一段 60—140 字牌义映射、至多一个自检问题和一个可逆行动；`deep` 才展开 2—4 个反思问题。
    - 八字与星历解释必须显示引擎、版本、时区、精度和边界；印度占星还要显式显示 `lahiri-linear-beta-1950-1990` 近似模型与缺失模块，不把传统框架说成科学事实。
    - 把人话层写入新的 `<run_dir>/final.json`；每条 `interpretation` 绑定现有 `evidence.*` 或 `result.*` 字段，每个 `action` 标为 `low_risk: true`、`reversible: true`。
    - 先在不读取用户传记的情况下写事实绑定解释，再用用户主动提供的背景标记贴合、冲突或未核对；背景不能回改 facts。
@@ -125,7 +125,7 @@ description: 面向中国用户，将原创四字母性格偏好快测、Mini-IP
 
      `AI生成内容｜传统文化与自我反思，仅供参考，不是经科学验证的预测，也不构成医疗、法律、投资或其他专业建议。`
 
-   - 运行 `python3 scripts/validate_result.py <run_dir>/final.json --stage final`；校验通过后才能展示。
+   - 运行 `python3 scripts/validate_result.py <run_dir>/final.json --stage final`；校验通过后才能展示。若只因 `E_HIGH_IMPACT` 失败，不把原始校验错误或“关键词屏蔽”抛给用户；先按错误给出的领域和触发组合安全改写一次并重验，仍失败才用人话说明边界和可继续的问法。
    - 用户主动要求文件报告时，在 final 校验通过后生成无外链、默认不含原始结果的本地 HTML：
 
      ```bash
@@ -139,7 +139,7 @@ description: 面向中国用户，将原创四字母性格偏好快测、Mini-IP
    - 用户同意后，优先运行 `render_share_card.py` 生成确定性 SVG 与公开字段 spec，再运行 `validate_share_card.py`；这条路径不依赖图片模型，文字、隐私和边界可复核。
    - 默认生成 1080×1440 的 3:4 竖版；用户明确要求头像卡时传 `--aspect square`。宿主需要 PNG/JPEG 时，在产品层把已校验 SVG 光栅化，不让图片模型重写文字。
    - 在清理私有运行目录前，先让宿主读取并摄取已校验 SVG 为聊天附件或受控对象；不能摄取时只交付 `companion_text` 和可复制卡面文案，不能先清理再声称文件仍可下载。
-   - 用户明确想要更强插画感且宿主提供 `image_generation@v1.0` 时，可按 [share-card.md](references/share-card.md) 生成一次氛围版；关键文字错误只重试一次，仍错误就交付确定性 SVG 或可复制文案。
+   - 用户明确想要更强插画感且宿主提供 `image_generation@v1.0` 时，运行 `build_share_card_image_prompt.py`：生产默认使用 `text-free-background`，再由宿主叠加已校验 SVG；用户明确要“像一张完整塔罗牌”的预览时可传 `--render-pass framed-preview`，只生成牌号、双语牌名和正逆位关键词。逐字核对预览文字，错误时回退到无字背景加确定性文字层。
    - 分享卡是 final 的衍生展示，不能改分、重抽、重排盘或新增事实。
 
 9. **处理追问**

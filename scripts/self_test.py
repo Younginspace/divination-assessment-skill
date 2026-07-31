@@ -15,6 +15,11 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 
+from validate_result import (
+    detect_high_impact_categories,
+    validate_high_impact_text,
+)
+
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 PYTHON = sys.executable
@@ -775,6 +780,21 @@ def test_oracle(temp_dir: Path) -> None:
             str(approvals),
         ]
     )
+    draw_result = json.loads(result_path.read_text(encoding="utf-8"))
+    assert_equal(
+        draw_result["evidence"]["deck_version"],
+        "major-arcana-reflection-22-v2",
+        "oracle uses structured-meaning deck",
+    )
+    for field in (
+        "archetype_zh",
+        "keywords_zh",
+        "upright_lens_zh",
+        "reversed_lens_zh",
+        "visual_symbols_zh",
+    ):
+        if field not in draw_result["result"]["card"]:
+            raise TestFailure(f"oracle card missing {field}")
     idempotent = run(
         oracle_args(
             "reveal",
@@ -893,6 +913,31 @@ def test_oracle(temp_dir: Path) -> None:
             str(approvals),
         ]
     )
+
+
+def test_safety_screening(_: Path) -> None:
+    assert_equal(
+        detect_high_impact_categories("我想了解投资这个词是什么意思"),
+        [],
+        "single domain word is not blocked",
+    )
+    assert_equal(
+        detect_high_impact_categories("不能建议买入股票，也不代表稳赚"),
+        [],
+        "negated safety boundary is not blocked",
+    )
+    risky = "塔罗显示这只股票建议买入"
+    categories = detect_high_impact_categories(risky)
+    if "finance" not in categories or "explicit" not in categories:
+        raise TestFailure(f"risk categories missing for {risky!r}: {categories}")
+    errors: list[str] = []
+    validate_high_impact_text(risky, "actions[0].text", errors)
+    if (
+        not errors
+        or "E_HIGH_IMPACT" not in errors[0]
+        or "不是因单独出现某个普通词而屏蔽" not in errors[0]
+    ):
+        raise TestFailure(f"safety reason is not auditable: {errors}")
 
 
 def valid_chart_payload() -> dict[str, Any]:
@@ -1555,6 +1600,68 @@ def test_share_card(temp_dir: Path) -> None:
     square = json.loads(square_spec.read_text(encoding="utf-8"))
     assert_equal(square["canvas"], {"width": 1080, "height": 1080}, "square card")
 
+    image_prompt_path = temp_dir / "oracle-image-prompt.json"
+    run(
+        [
+            "build_share_card_image_prompt.py",
+            str(oracle_path),
+            "--output",
+            str(image_prompt_path),
+            "--controls",
+            str(temp_dir / "feature-approvals.json"),
+        ]
+    )
+    image_prompt = json.loads(image_prompt_path.read_text(encoding="utf-8"))
+    assert_equal(
+        image_prompt["render_pass"],
+        "text-free-background",
+        "oracle image render pass",
+    )
+    oracle_spec_payload = json.loads(
+        (temp_dir / "card-oracle.json").read_text(encoding="utf-8")
+    )
+    assert_equal(
+        image_prompt["overlay_exact_text"],
+        oracle_spec_payload["exact_text"],
+        "image prompt preserves deterministic overlay text",
+    )
+    if (
+        "client_seed" in image_prompt["prompt"]
+        or oracle_final["run_id"] in image_prompt["prompt"]
+    ):
+        raise TestFailure("image prompt leaked private draw metadata")
+    if image_prompt_path.stat().st_mode & 0o077:
+        raise TestFailure("image prompt output must use mode 0600")
+
+    framed_prompt_path = temp_dir / "oracle-framed-preview-prompt.json"
+    run(
+        [
+            "build_share_card_image_prompt.py",
+            str(oracle_path),
+            "--render-pass",
+            "framed-preview",
+            "--output",
+            str(framed_prompt_path),
+            "--controls",
+            str(temp_dir / "feature-approvals.json"),
+        ]
+    )
+    framed_prompt = json.loads(framed_prompt_path.read_text(encoding="utf-8"))
+    assert_equal(
+        framed_prompt["render_pass"],
+        "framed-preview",
+        "oracle framed preview render pass",
+    )
+    assert_equal(
+        len(framed_prompt["preview_exact_text"]),
+        4,
+        "oracle framed preview exact text count",
+    )
+    if oracle_final["result"]["card"]["name_zh"] not in framed_prompt["preview_exact_text"]:
+        raise TestFailure("framed preview omitted the exact Chinese card name")
+    if "只渲染以下四项 Exact text" not in framed_prompt["prompt"]:
+        raise TestFailure("framed preview prompt omitted its exact-text constraint")
+
     unsafe_svg = temp_dir / "unsafe-nickname.svg"
     unsafe_spec = temp_dir / "unsafe-nickname.json"
     run(
@@ -1604,6 +1711,7 @@ def main() -> int:
         ("type-preference", test_type_preference),
         ("relationship", test_relationship),
         ("oracle", test_oracle),
+        ("safety-screening", test_safety_screening),
         ("chart-adapter", test_chart_adapter),
         ("builtin-engines", test_builtin_engines),
         ("report-followup", test_report_followup),

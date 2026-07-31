@@ -67,7 +67,12 @@ python3 scripts/feature_gate.py \
    python3 scripts/validate_result.py <run_dir>/facts.json
    ```
 
-8. 输出牌名、正逆位、验证字段、2—4 个开放问题和一个可逆行动，再按 [output-contracts.md](output-contracts.md) 生成并校验 final JSON。
+8. 输出牌名、正逆位和验证字段。解释必须按以下链路展开，再按 [output-contracts.md](output-contracts.md) 生成并校验 final JSON：
+   1. **通用母题**：逐字依据 `result.card.archetype_zh`，说明这张牌通常把注意力放在哪里；
+   2. **方向变化**：正位引用 `upright_lens_zh`，逆位引用 `reversed_lens_zh`；逆位表示能量受阻、内化或失衡，不等于坏运；
+   3. **问题映射**：说明牌义中的哪一部分与用户当前问题形成联想，不推断第三方内心；
+   4. **现实落点**：给一个低成本、可拒绝、可逆的行动。
+   `quick` 只加至多一个自检问题；`deep` 才给 2—4 个开放问题。不要只报牌名后直接下结论。
 9. 在完成、取消或失败后的 `finally` 中运行 `secure_run_dir.py create` 返回的精确 cleanup 命令。宿主仍需处理聊天记录、备份和日志生命周期。
 
 ## 5. 并发与恢复
@@ -119,7 +124,7 @@ orientation = digest 的第 9 字节最低位；0 为正位，1 为逆位
 
 合格：
 
-- “抽到‘隐者·正位’。把它当成一个提问镜头：这件事里，哪些答案需要你先独处核对，而不是继续收集他人的意见？”
+- “抽到‘隐者·正位’。隐者的通用母题是离开外界噪音，辨认自己真正想找的答案；正位把重点放在想清行动目的后，再用克制而明确的方式试探。放到你的问题里，它更像是在提醒你：可以行动，但别把一次邀约变成索取关系结论。”
 
 不合格：
 
@@ -128,5 +133,7 @@ orientation = digest 的第 9 字节最低位；0 为正位，1 为逆位
 - “再付费抽三张才能化解。”
 
 不根据用户期待重抽，不把逆位说成坏运，不制造依赖或稀缺感。
+
+牌义 v2 是随牌组固定并进入 `deck_hash` 的原创当代中文释义。Agent 可以压缩措辞，但不能临时换成相反含义，也不能把通用象征写成未来事实。
 
 final 结果还必须包含 [safety-and-compliance.md](safety-and-compliance.md) 规定的 AI 生成和用途边界声明。

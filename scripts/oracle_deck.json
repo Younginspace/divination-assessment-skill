@@ -1,29 +1,228 @@
 {
-  "schema_version": "1.0.0",
-  "deck_version": "major-arcana-reflection-22-v1",
+  "schema_version": "2.0.0",
+  "deck_version": "major-arcana-reflection-22-v2",
   "not_a_prediction": true,
+  "meaning_basis_zh": "基于大阿尔卡那常见象征母题编写的原创当代中文释义，只用于联想与自我反思。",
   "cards": [
-    {"index": 0, "name_zh": "愚者", "name_en": "The Fool"},
-    {"index": 1, "name_zh": "魔术师", "name_en": "The Magician"},
-    {"index": 2, "name_zh": "女祭司", "name_en": "The High Priestess"},
-    {"index": 3, "name_zh": "皇后", "name_en": "The Empress"},
-    {"index": 4, "name_zh": "皇帝", "name_en": "The Emperor"},
-    {"index": 5, "name_zh": "教皇", "name_en": "The Hierophant"},
-    {"index": 6, "name_zh": "恋人", "name_en": "The Lovers"},
-    {"index": 7, "name_zh": "战车", "name_en": "The Chariot"},
-    {"index": 8, "name_zh": "力量", "name_en": "Strength"},
-    {"index": 9, "name_zh": "隐者", "name_en": "The Hermit"},
-    {"index": 10, "name_zh": "命运之轮", "name_en": "Wheel of Fortune"},
-    {"index": 11, "name_zh": "正义", "name_en": "Justice"},
-    {"index": 12, "name_zh": "倒吊人", "name_en": "The Hanged Man"},
-    {"index": 13, "name_zh": "死神", "name_en": "Death"},
-    {"index": 14, "name_zh": "节制", "name_en": "Temperance"},
-    {"index": 15, "name_zh": "恶魔", "name_en": "The Devil"},
-    {"index": 16, "name_zh": "高塔", "name_en": "The Tower"},
-    {"index": 17, "name_zh": "星星", "name_en": "The Star"},
-    {"index": 18, "name_zh": "月亮", "name_en": "The Moon"},
-    {"index": 19, "name_zh": "太阳", "name_en": "The Sun"},
-    {"index": 20, "name_zh": "审判", "name_en": "Judgement"},
-    {"index": 21, "name_zh": "世界", "name_en": "The World"}
+    {
+      "index": 0,
+      "name_zh": "愚者",
+      "name_en": "The Fool",
+      "archetype_zh": "带着好奇走进尚未定义的新阶段。",
+      "keywords_zh": ["开始", "试探", "开放"],
+      "upright_lens_zh": "重点在允许一次轻量尝试，不必先把所有结果想明白。",
+      "reversed_lens_zh": "重点在区分真诚冒险与没看清代价的冲动。",
+      "visual_symbols_zh": ["晨雾中的悬崖边缘", "轻装旅人", "迎风的白色花朵"]
+    },
+    {
+      "index": 1,
+      "name_zh": "魔术师",
+      "name_en": "The Magician",
+      "archetype_zh": "把已有资源集中起来，让意图落到具体行动。",
+      "keywords_zh": ["主动", "表达", "调动资源"],
+      "upright_lens_zh": "重点在清楚表达你能做什么，并迈出可验证的一步。",
+      "reversed_lens_zh": "重点在检查表达是否华丽多于真实，或行动与意图不一致。",
+      "visual_symbols_zh": ["发光的工作台", "四种元素器物", "向上与向下呼应的手势"]
+    },
+    {
+      "index": 2,
+      "name_zh": "女祭司",
+      "name_en": "The High Priestess",
+      "archetype_zh": "在信息未明时，给直觉与观察留出安静空间。",
+      "keywords_zh": ["直觉", "保留", "未揭示信息"],
+      "upright_lens_zh": "重点在先观察细节与内在反应，不急着要求结论。",
+      "reversed_lens_zh": "重点在辨认沉默究竟是直觉提醒，还是回避沟通。",
+      "visual_symbols_zh": ["月色帷幕", "静水倒影", "半掩的卷轴"]
+    },
+    {
+      "index": 3,
+      "name_zh": "皇后",
+      "name_en": "The Empress",
+      "archetype_zh": "让关系、创意或计划在照料中自然生长。",
+      "keywords_zh": ["滋养", "丰盛", "感受"],
+      "upright_lens_zh": "重点在提供真实的关注与舒适空间，而不是催促结果。",
+      "reversed_lens_zh": "重点在检查是否照顾别人过多，却忽略自己的需要与边界。",
+      "visual_symbols_zh": ["金色麦穗", "柔软织物", "繁茂花园"]
+    },
+    {
+      "index": 4,
+      "name_zh": "皇帝",
+      "name_en": "The Emperor",
+      "archetype_zh": "用边界、结构和责任感稳定局面。",
+      "keywords_zh": ["秩序", "边界", "承担"],
+      "upright_lens_zh": "重点在把规则和期待说清楚，让行动可持续。",
+      "reversed_lens_zh": "重点在检查控制欲、僵化标准或对确定性的过度要求。",
+      "visual_symbols_zh": ["石阶与高座", "几何山体", "稳固的方形构图"]
+    },
+    {
+      "index": 5,
+      "name_zh": "教皇",
+      "name_en": "The Hierophant",
+      "archetype_zh": "借助传统、共同规则或可信经验理解眼前选择。",
+      "keywords_zh": ["规范", "传承", "共同语言"],
+      "upright_lens_zh": "重点在寻找双方都认同的方式与清楚的关系语境。",
+      "reversed_lens_zh": "重点在分辨哪些规则真的适合你，哪些只是惯性服从。",
+      "visual_symbols_zh": ["层叠拱门", "古老书页", "两把交叉钥匙"]
+    },
+    {
+      "index": 6,
+      "name_zh": "恋人",
+      "name_en": "The Lovers",
+      "archetype_zh": "在吸引、价值观与选择之间保持一致。",
+      "keywords_zh": ["连接", "选择", "价值一致"],
+      "upright_lens_zh": "重点在坦诚表达选择，并观察彼此是否愿意共同靠近。",
+      "reversed_lens_zh": "重点在检查吸引是否掩盖了价值冲突或沟通错位。",
+      "visual_symbols_zh": ["两条相向的路径", "双生树木", "交汇的暖光"]
+    },
+    {
+      "index": 7,
+      "name_zh": "战车",
+      "name_en": "The Chariot",
+      "archetype_zh": "让分散的力量朝一个清楚方向前进。",
+      "keywords_zh": ["推进", "意志", "掌舵"],
+      "upright_lens_zh": "重点在定下方向并主动推进，但保留对现实反馈的调整。",
+      "reversed_lens_zh": "重点在检查是否用力过猛、节奏失控或目标彼此冲突。",
+      "visual_symbols_zh": ["夜色战车", "两匹方向相反的兽", "笔直延伸的道路"]
+    },
+    {
+      "index": 8,
+      "name_zh": "力量",
+      "name_en": "Strength",
+      "archetype_zh": "以温柔但坚定的方式容纳冲动与不安。",
+      "keywords_zh": ["勇气", "耐心", "柔韧"],
+      "upright_lens_zh": "重点在稳定自己后表达真实，而不是靠压迫获得回应。",
+      "reversed_lens_zh": "重点在承认胆怯或自我怀疑，先降低行动门槛。",
+      "visual_symbols_zh": ["人与狮子的安静对视", "无限结", "柔和金色鬃毛"]
+    },
+    {
+      "index": 9,
+      "name_zh": "隐者",
+      "name_en": "The Hermit",
+      "archetype_zh": "暂时离开外界噪音，辨认自己真正想寻找的答案。",
+      "keywords_zh": ["独处", "辨认", "审慎"],
+      "upright_lens_zh": "重点在想清楚行动目的，再用克制而明确的方式试探。",
+      "reversed_lens_zh": "重点在检查独处是否已变成退缩，或反复思考代替了必要沟通。",
+      "visual_symbols_zh": ["雪山小径", "举灯旅人", "灯中六芒星"]
+    },
+    {
+      "index": 10,
+      "name_zh": "命运之轮",
+      "name_en": "Wheel of Fortune",
+      "archetype_zh": "承认局面正在变化，并寻找自己能调整的部分。",
+      "keywords_zh": ["变化", "周期", "转折"],
+      "upright_lens_zh": "重点在抓住出现的新窗口，同时接受结果并非完全可控。",
+      "reversed_lens_zh": "重点在识别重复模式，不把暂时不顺解释成永久结论。",
+      "visual_symbols_zh": ["星空中的轮环", "四季纹样", "流动的云层"]
+    },
+    {
+      "index": 11,
+      "name_zh": "正义",
+      "name_en": "Justice",
+      "archetype_zh": "让决定经得起事实、边界与后果的核对。",
+      "keywords_zh": ["公平", "事实", "责任"],
+      "upright_lens_zh": "重点在依据真实互动做判断，并对自己的表达负责。",
+      "reversed_lens_zh": "重点在检查双重标准、选择性取证或回避后果。",
+      "visual_symbols_zh": ["平衡天平", "垂直长剑", "对称红色帷幕"]
+    },
+    {
+      "index": 12,
+      "name_zh": "倒吊人",
+      "name_en": "The Hanged Man",
+      "archetype_zh": "暂停惯常动作，从相反角度重看困局。",
+      "keywords_zh": ["暂停", "换位", "放下控制"],
+      "upright_lens_zh": "重点在延迟立即反应，先换一个角度理解现状。",
+      "reversed_lens_zh": "重点在分辨等待是否仍有价值，还是已经变成无期限拖延。",
+      "visual_symbols_zh": ["倒悬的人影", "发光的树枝", "静止的水滴"]
+    },
+    {
+      "index": 13,
+      "name_zh": "死神",
+      "name_en": "Death",
+      "archetype_zh": "结束失去作用的阶段，为新的形态腾出空间。",
+      "keywords_zh": ["结束", "转化", "释放"],
+      "upright_lens_zh": "重点在接受某种旧模式需要结束，转向更真实的下一步。",
+      "reversed_lens_zh": "重点在看见对结束的抗拒，以及它如何拖住改变。",
+      "visual_symbols_zh": ["远方日出", "凋落与新芽", "缓慢前行的白马"]
+    },
+    {
+      "index": 14,
+      "name_zh": "节制",
+      "name_en": "Temperance",
+      "archetype_zh": "把不同需求调到可以共存的比例与节奏。",
+      "keywords_zh": ["调和", "耐心", "适度"],
+      "upright_lens_zh": "重点在降低强度、逐步靠近，让反馈决定下一步。",
+      "reversed_lens_zh": "重点在检查节奏失衡、情绪过量或两端来回摆动。",
+      "visual_symbols_zh": ["两只交换水流的杯", "一脚入水一脚着地", "通往晨光的小径"]
+    },
+    {
+      "index": 15,
+      "name_zh": "恶魔",
+      "name_en": "The Devil",
+      "archetype_zh": "看见欲望、依赖与自我束缚如何影响选择。",
+      "keywords_zh": ["执着", "诱惑", "失去自由"],
+      "upright_lens_zh": "重点在诚实面对吸引与焦虑，避免把它们包装成不得不做。",
+      "reversed_lens_zh": "重点在发现束缚并非牢不可破，可以从一个小边界开始松开。",
+      "visual_symbols_zh": ["松动的锁链", "暗红火光", "镜面般的黑石"]
+    },
+    {
+      "index": 16,
+      "name_zh": "高塔",
+      "name_en": "The Tower",
+      "archetype_zh": "突发冲击打破原有假设，迫使事实浮现。",
+      "keywords_zh": ["冲击", "揭示", "重建"],
+      "upright_lens_zh": "重点在先处理已经显露的事实，不急着维护旧解释。",
+      "reversed_lens_zh": "重点在检查是否为了避免震动而长期压住明显问题。",
+      "visual_symbols_zh": ["裂开的高塔", "穿云闪电", "碎石后的开阔地"]
+    },
+    {
+      "index": 17,
+      "name_zh": "星星",
+      "name_en": "The Star",
+      "archetype_zh": "在经历消耗后，重新建立希望与坦诚。",
+      "keywords_zh": ["希望", "疗愈感", "真诚"],
+      "upright_lens_zh": "重点在用真实、不过度包装的方式表达愿望。",
+      "reversed_lens_zh": "重点在照顾失望后的迟疑，不强迫自己立刻乐观。",
+      "visual_symbols_zh": ["八芒星", "倾倒清水的人影", "夜色中的新芽"]
+    },
+    {
+      "index": 18,
+      "name_zh": "月亮",
+      "name_en": "The Moon",
+      "archetype_zh": "在模糊、投射与情绪波动中慢慢核对真实。",
+      "keywords_zh": ["不确定", "投射", "潜意识"],
+      "upright_lens_zh": "重点在承认你还看不清，不把想象当作对方的真实意图。",
+      "reversed_lens_zh": "重点在迷雾开始变薄时，用事实修正旧有猜测。",
+      "visual_symbols_zh": ["双塔间的月路", "潮汐水面", "犬与狼的剪影"]
+    },
+    {
+      "index": 19,
+      "name_zh": "太阳",
+      "name_en": "The Sun",
+      "archetype_zh": "让事情回到清楚、坦率和可共享的喜悦。",
+      "keywords_zh": ["清晰", "活力", "坦率"],
+      "upright_lens_zh": "重点在直接但不过度地表达，让互动回到真实感受。",
+      "reversed_lens_zh": "重点在检查过高期待或勉强积极是否遮住了细微不适。",
+      "visual_symbols_zh": ["巨大的向日葵", "白马与红色旗帜", "低空暖阳"]
+    },
+    {
+      "index": 20,
+      "name_zh": "审判",
+      "name_en": "Judgement",
+      "archetype_zh": "听见内在召唤，重新评价过去并作出回应。",
+      "keywords_zh": ["觉察", "复盘", "回应"],
+      "upright_lens_zh": "重点在根据已经学到的东西作出新的选择。",
+      "reversed_lens_zh": "重点在放下过度自我评判，避免因怕做错而迟迟不回应。",
+      "visual_symbols_zh": ["穿透云层的号角光", "苏醒的人群剪影", "展开的双翼"]
+    },
+    {
+      "index": 21,
+      "name_zh": "世界",
+      "name_en": "The World",
+      "archetype_zh": "一个阶段形成完整闭环，也打开更广阔的下一程。",
+      "keywords_zh": ["完成", "整合", "展开"],
+      "upright_lens_zh": "重点在承认已经成熟的部分，并自然推进到下一阶段。",
+      "reversed_lens_zh": "重点在找出尚未收尾的一环，先完成它再追求新的开始。",
+      "visual_symbols_zh": ["月桂环", "舞动的人影", "四角守望者"]
+    }
   ]
 }

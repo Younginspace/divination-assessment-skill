@@ -63,7 +63,7 @@
 
 4. 抽牌、排盘或传统报告还要加入规定的 `disclaimer`。
 5. 运行 `python3 scripts/validate_result.py <run_dir>/final.json --stage final`。`evidence_paths` 必须指向真实存在的事实字段。
-6. 验证器会硬拦部分绝对化和高影响短语，但不能替代宿主的前置意图分类和后置语义安全检查。
+6. 验证器会把完整高风险表达或“领域对象＋预测/行动”组合标成 `E_HIGH_IMPACT`，并给出可审计的触发依据。它不是普通关键词屏蔽，不能替代宿主的前置意图分类和后置语义安全检查。Agent 先安全改写一次并重验；不要把原始错误、内部字段名或命中词表直接展示给用户。
 
 ## 3. 统一 JSON
 
@@ -118,6 +118,22 @@
 
 先给结论，再给方法；不要用玄学语气掩盖证据缺口。
 
+抽牌 `quick` 使用更紧凑的首屏：
+
+```markdown
+抽到：牌名 · 正/逆位
+
+结论：[一句直接回答]
+
+牌义：[通用母题] [该方向把重点移到哪里]
+
+放到你的问题里：[只映射用户已说的情境，不推断第三方]
+
+可以试的一步：[一个可逆行动]
+```
+
+牌义必须绑定 `result.card.archetype_zh` 与对应方向的 `*_lens_zh`，不能只引用牌名，也不能把牌义包装成科学证据。
+
 `quick` 最多展示 3 条解释和 2 个行动；`deep` 先复用同一首屏，再展开专题、反证和技术附录。两种深度使用相同 facts，不得因深度不同改写事实。
 
 ## 5. 模式必备字段
@@ -148,12 +164,14 @@
 
 - `evidence.deck_version`
 - `evidence.deck_hash`
+- v2 牌组包含 `evidence.meaning_basis_zh`，说明牌义是固定、原创的当代中文释义
 - `evidence.commitment`
 - `evidence.client_seed`
 - `evidence.server_seed_reveal`
 - `evidence.verification_formula`
 - `evidence.feature_control`
 - `result.card` 与 `result.orientation`
+- v2 的 `result.card` 必须含 `archetype_zh`、`keywords_zh`、`upright_lens_zh`、`reversed_lens_zh` 和 `visual_symbols_zh`；解释只引用本次方向对应的 lens
 - 明确 `not_a_prediction: true`
 
 ### Chart interpretation

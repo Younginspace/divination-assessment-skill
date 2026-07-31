@@ -23,7 +23,10 @@ from feature_gate import GateError, check_feature, sha256_json
 
 
 SCRIPT_DIR = Path(__file__).resolve().parent
-DECK_PATH = SCRIPT_DIR / "oracle_deck.json"
+CURRENT_DECK_PATH = SCRIPT_DIR / "oracle_deck.json"
+LEGACY_DECK_PATHS = {
+    "major-arcana-reflection-22-v1": SCRIPT_DIR / "oracle_deck_v1.json",
+}
 COMMIT_PREFIX = "divination-assessment|commit"
 DRAW_PREFIX = "divination-assessment|draw"
 FEATURE = "oracle-reflection"
@@ -122,13 +125,24 @@ def exclusive_state_lock(state_path: Path) -> Iterator[None]:
         raise
 
 
-def load_deck() -> dict[str, Any]:
-    deck = load_json(DECK_PATH)
+def load_deck(deck_version: str | None = None) -> dict[str, Any]:
+    path = (
+        CURRENT_DECK_PATH
+        if deck_version is None
+        else LEGACY_DECK_PATHS.get(deck_version, CURRENT_DECK_PATH)
+    )
+    deck = load_json(path)
     cards = deck.get("cards") if isinstance(deck, dict) else None
     if not isinstance(cards, list) or len(cards) != 22:
         raise RuntimeError("Oracle deck must contain exactly 22 cards")
     if [card.get("index") for card in cards] != list(range(22)):
         raise RuntimeError("Oracle deck indices must be contiguous from 0 to 21")
+    if deck_version is not None and deck.get("deck_version") != deck_version:
+        raise DrawError(
+            "E_DRAW_STATE",
+            f"找不到 commit 使用的牌组版本：{deck_version}",
+            ["deck_version"],
+        )
     return deck
 
 
@@ -330,6 +344,10 @@ def build_result(
         "evidence": {
             "deck_version": deck["deck_version"],
             "deck_hash": f"sha256:{state['deck_hash']}",
+            "meaning_basis_zh": deck.get(
+                "meaning_basis_zh",
+                "早期牌组仅固定牌名，不含结构化牌义。",
+            ),
             "commitment": state["commitment"],
             "client_seed": client_seed,
             "server_seed_reveal": server_seed_hex,
@@ -371,9 +389,13 @@ def reveal(
     scope: str,
 ) -> tuple[dict[str, Any], bool]:
     receipt = feature_receipt(controls_path, scope)
-    deck = load_deck()
     with exclusive_state_lock(state_path):
-        state = validate_state(load_json(state_path), deck, receipt)
+        raw_state = load_json(state_path)
+        deck_version = (
+            raw_state.get("deck_version") if isinstance(raw_state, dict) else None
+        )
+        deck = load_deck(deck_version)
+        state = validate_state(raw_state, deck, receipt)
         if state["status"] == "revealed":
             existing = state.get("revealed_result")
             if not isinstance(existing, dict):
@@ -413,9 +435,13 @@ def export_existing(
     scope: str,
 ) -> dict[str, Any]:
     receipt = feature_receipt(controls_path, scope)
-    deck = load_deck()
     with exclusive_state_lock(state_path):
-        state = validate_state(load_json(state_path), deck, receipt)
+        raw_state = load_json(state_path)
+        deck_version = (
+            raw_state.get("deck_version") if isinstance(raw_state, dict) else None
+        )
+        deck = load_deck(deck_version)
+        state = validate_state(raw_state, deck, receipt)
         if state["status"] != "revealed" or not isinstance(
             state.get("revealed_result"), dict
         ):

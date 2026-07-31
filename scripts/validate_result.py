@@ -18,7 +18,10 @@ from validate_chart_adapter import validate_chart
 
 
 SCRIPT_DIR = Path(__file__).resolve().parent
-DECK_PATH = SCRIPT_DIR / "oracle_deck.json"
+CURRENT_DECK_PATH = SCRIPT_DIR / "oracle_deck.json"
+LEGACY_DECK_PATHS = {
+    "major-arcana-reflection-22-v1": SCRIPT_DIR / "oracle_deck_v1.json",
+}
 MINI_IPIP_PATH = SCRIPT_DIR / "mini_ipip_items.json"
 RELATIONSHIP_ITEMS_PATH = SCRIPT_DIR / "relationship_items.json"
 TYPE_PREFERENCE_PATH = SCRIPT_DIR / "type_preference_items.json"
@@ -206,13 +209,62 @@ def contains_any(text: str, terms: tuple[str, ...]) -> bool:
     return any(term in text for term in terms)
 
 
-def detect_high_impact_categories(text: str) -> list[str]:
-    """Return high-impact domains found by explicit phrases or semantic co-occurrence."""
-    normalized = re.sub(r"\s+", "", text).lower()
-    categories: set[str] = set()
+NEGATION_CONTEXT = re.compile(
+    r"(?:不能|不可以|不可|不得|禁止|不要|不应|无需|无法|并非|不是|不代表|"
+    r"拒绝|避免|别|未|不)[^，。；！？]{0,4}$"
+)
 
-    if any(phrase.lower() in normalized for phrase in PROHIBITED_HIGH_IMPACT_PHRASES):
-        categories.add("explicit")
+
+def matching_terms(text: str, terms: tuple[str, ...]) -> list[str]:
+    return [term for term in terms if term in text]
+
+
+def assertive_matches(text: str, terms: tuple[str, ...]) -> list[str]:
+    """Match terms unless the local clause explicitly negates or forbids them."""
+    matches: list[str] = []
+    for term in terms:
+        start = 0
+        while True:
+            index = text.find(term, start)
+            if index < 0:
+                break
+            prefix = text[max(0, index - 12) : index]
+            if not NEGATION_CONTEXT.search(prefix):
+                matches.append(term)
+                break
+            start = index + len(term)
+    return matches
+
+
+def detect_high_impact_findings(text: str) -> list[dict[str, Any]]:
+    """Return auditable high-impact findings, including the matched term combination."""
+    normalized = re.sub(r"\s+", "", text).lower()
+    findings: dict[str, dict[str, Any]] = {}
+
+    explicit_matches = assertive_matches(
+        normalized,
+        tuple(phrase.lower() for phrase in PROHIBITED_HIGH_IMPACT_PHRASES),
+    )
+    if explicit_matches:
+        findings["explicit"] = {
+            "category": "explicit",
+            "trigger_type": "high_risk_phrase",
+            "matched_terms": explicit_matches[:3],
+        }
+
+    def add_cooccurrence(
+        category: str,
+        objects: tuple[str, ...],
+        actions_or_outcomes: tuple[str, ...],
+    ) -> None:
+        object_matches = matching_terms(normalized, objects)
+        action_matches = assertive_matches(normalized, actions_or_outcomes)
+        if object_matches and action_matches:
+            findings[category] = {
+                "category": category,
+                "trigger_type": "object_action_combination",
+                "matched_terms": [object_matches[0], action_matches[0]],
+            }
 
     finance_objects = (
         "股票",
@@ -259,10 +311,7 @@ def detect_high_impact_categories(text: str) -> list[str]:
         "建议买",
         "应该买",
     )
-    if contains_any(normalized, finance_objects) and contains_any(
-        normalized, finance_outcomes_or_actions
-    ):
-        categories.add("finance")
+    add_cooccurrence("finance", finance_objects, finance_outcomes_or_actions)
 
     medication_terms = (
         "药",
@@ -294,10 +343,7 @@ def detect_high_impact_categories(text: str) -> list[str]:
         "取消手术",
         "放弃治疗",
     )
-    if contains_any(normalized, medication_terms) and contains_any(
-        normalized, medical_actions
-    ):
-        categories.add("medical")
+    add_cooccurrence("medical", medication_terms, medical_actions)
 
     legal_objects = (
         "起诉",
@@ -330,10 +376,7 @@ def detect_high_impact_categories(text: str) -> list[str]:
         "隐瞒",
         "伪造",
     )
-    if contains_any(normalized, legal_objects) and contains_any(
-        normalized, legal_actions_or_outcomes
-    ):
-        categories.add("legal")
+    add_cooccurrence("legal", legal_objects, legal_actions_or_outcomes)
 
     gambling_objects = (
         "赌博",
@@ -361,10 +404,7 @@ def detect_high_impact_categories(text: str) -> list[str]:
         "高回报",
         "赚回来",
     )
-    if contains_any(normalized, gambling_objects) and contains_any(
-        normalized, gambling_actions_or_outcomes
-    ):
-        categories.add("gambling")
+    add_cooccurrence("gambling", gambling_objects, gambling_actions_or_outcomes)
 
     fertility_objects = (
         "怀孕",
@@ -400,10 +440,7 @@ def detect_high_impact_categories(text: str) -> list[str]:
         "生男",
         "生女",
     )
-    if contains_any(normalized, fertility_objects) and contains_any(
-        normalized, fertility_predictions_or_actions
-    ):
-        categories.add("fertility")
+    add_cooccurrence("fertility", fertility_objects, fertility_predictions_or_actions)
 
     mortality_objects = (
         "死亡",
@@ -428,10 +465,7 @@ def detect_high_impact_categories(text: str) -> list[str]:
         "活不过",
         "大限",
     )
-    if contains_any(normalized, mortality_objects) and contains_any(
-        normalized, mortality_predictions
-    ):
-        categories.add("mortality")
+    add_cooccurrence("mortality", mortality_objects, mortality_predictions)
 
     education_employment_objects = (
         "录取",
@@ -469,25 +503,41 @@ def detect_high_impact_categories(text: str) -> list[str]:
         "必须",
         "放弃",
     )
-    if contains_any(normalized, education_employment_objects) and contains_any(
-        normalized, education_employment_predictions_or_actions
-    ):
-        categories.add("education_employment")
+    add_cooccurrence(
+        "education_employment",
+        education_employment_objects,
+        education_employment_predictions_or_actions,
+    )
 
-    return sorted(categories)
+    return [findings[key] for key in sorted(findings)]
+
+
+def detect_high_impact_categories(text: str) -> list[str]:
+    """Compatibility wrapper returning only category identifiers."""
+    return [finding["category"] for finding in detect_high_impact_findings(text)]
 
 
 def validate_high_impact_text(text: str, field: str, errors: list[str]) -> None:
-    categories = detect_high_impact_categories(text)
-    if not categories:
+    findings = detect_high_impact_findings(text)
+    if not findings:
         return
     labels = [
         "明确禁止词组"
-        if category == "explicit"
-        else HIGH_IMPACT_CATEGORY_LABELS[category]
-        for category in categories
+        if finding["category"] == "explicit"
+        else HIGH_IMPACT_CATEGORY_LABELS[finding["category"]]
+        for finding in findings
     ]
-    errors.append(f"{field} 含高影响预测或指令：{'、'.join(labels)}")
+    evidence = "；".join(
+        "完整高风险表达“" + " / ".join(finding["matched_terms"]) + "”"
+        if finding["trigger_type"] == "high_risk_phrase"
+        else "“" + "”与“".join(finding["matched_terms"]) + "”共同出现"
+        for finding in findings
+    )
+    errors.append(
+        f"E_HIGH_IMPACT：{field} 涉及{'、'.join(labels)}。"
+        f"识别依据：{evidence}；不是因单独出现某个普通词而屏蔽。"
+        "请改写为核对现实信息、风险或可逆下一步。"
+    )
 
 
 def load_json(path: Path) -> Any:
@@ -999,7 +1049,9 @@ def validate_oracle(
     ):
         errors.append("evidence.feature_control 与当前功能控制策略不一致")
 
-    deck = load_json(DECK_PATH)
+    deck_version = evidence["deck_version"]
+    deck_path = LEGACY_DECK_PATHS.get(deck_version, CURRENT_DECK_PATH)
+    deck = load_json(deck_path)
     if not isinstance(deck, dict) or evidence["deck_version"] != deck.get("deck_version"):
         errors.append("evidence.deck_version 与本地牌组不一致")
         return
@@ -1055,6 +1107,23 @@ def validate_oracle(
     card = result.get("card") if isinstance(result, dict) else None
     if card != cards[expected_index]:
         errors.append("result.card 与 digest 和本地牌组不一致")
+    if deck_version.endswith("-v2"):
+        if evidence.get("meaning_basis_zh") != deck.get("meaning_basis_zh"):
+            errors.append("evidence.meaning_basis_zh 与本地牌组释义来源不一致")
+        if isinstance(card, dict):
+            required_meaning_fields = {
+                "archetype_zh",
+                "keywords_zh",
+                "upright_lens_zh",
+                "reversed_lens_zh",
+                "visual_symbols_zh",
+            }
+            missing_meanings = sorted(required_meaning_fields - set(card))
+            if missing_meanings:
+                errors.append(
+                    "result.card 缺少结构化牌义字段："
+                    + "、".join(missing_meanings)
+                )
     if result.get("orientation") != expected_orientation:
         errors.append("result.orientation 与 digest 不一致")
     if result.get("not_a_prediction") is not True:
