@@ -1,0 +1,288 @@
+{
+  "schema_version": "1.0.0",
+  "instrument": {
+    "name": "四向偏好快照",
+    "version": "0.3.0",
+    "source": "independently-developed-original-zh-CN",
+    "content_status": "original-unvalidated-reflection-prototype",
+    "language": "zh-CN",
+    "translation_status": "original-zh-CN-unvalidated",
+    "official_affiliation": false,
+    "uses_official_item_bank_or_scoring": false,
+    "not_a_diagnostic_instrument": true,
+    "intended_use_zh": "帮助用户回顾近期的互动、取证、权衡和行动偏好。"
+  },
+  "administration": {
+    "instructions_zh": "这是一个非官方简单测试。请以过去三个月多数日常情境为准，每题只选更接近你的 A 或 B；不需要填写程度。",
+    "item_order": [
+      1,
+      4,
+      7,
+      10,
+      2,
+      5,
+      8,
+      11,
+      3,
+      6,
+      9,
+      12
+    ],
+    "side_randomization_zh": "宿主可以随机调整 A/B 的视觉位置，但不得互换选项的 id 或 pole；提交前必须把正向 pole 规范化为正值、负向 pole 规范化为负值，不能根据按钮左右位置推断分值。",
+    "all_items_required": true
+  },
+  "response_scale": {
+    "min": -1,
+    "max": 1,
+    "allowed_values": [
+      1,
+      -1
+    ],
+    "zh-CN": {
+      "1": "A",
+      "-1": "B"
+    },
+    "meaning_zh": "用户只选择 A 或 B；提交值是与按钮位置无关的规范化 pole 值：A=1，B=-1。"
+  },
+  "axes": {
+    "interaction_energy": {
+      "label_zh": "互动与恢复方式",
+      "positive_pole": {
+        "key": "external_activation",
+        "label_zh": "外部激活",
+        "letter": "E"
+      },
+      "negative_pole": {
+        "key": "internal_settling",
+        "label_zh": "内部沉淀",
+        "letter": "I"
+      },
+      "item_ids": [
+        1,
+        2,
+        3
+      ]
+    },
+    "information_focus": {
+      "label_zh": "信息关注方式",
+      "positive_pole": {
+        "key": "concrete_evidence",
+        "label_zh": "具体取证",
+        "letter": "S"
+      },
+      "negative_pole": {
+        "key": "pattern_possibilities",
+        "label_zh": "模式联想",
+        "letter": "N"
+      },
+      "item_ids": [
+        4,
+        5,
+        6
+      ]
+    },
+    "decision_weighting": {
+      "label_zh": "决定权衡方式",
+      "positive_pole": {
+        "key": "principled_reasoning",
+        "label_zh": "原则推演",
+        "letter": "T"
+      },
+      "negative_pole": {
+        "key": "value_awareness",
+        "label_zh": "价值体察",
+        "letter": "F"
+      },
+      "item_ids": [
+        7,
+        8,
+        9
+      ]
+    },
+    "action_organization": {
+      "label_zh": "行动组织方式",
+      "positive_pole": {
+        "key": "planned_closure",
+        "label_zh": "计划收束",
+        "letter": "J"
+      },
+      "negative_pole": {
+        "key": "flexible_exploration",
+        "label_zh": "灵活探索",
+        "letter": "P"
+      },
+      "item_ids": [
+        10,
+        11,
+        12
+      ]
+    }
+  },
+  "items": [
+    {
+      "id": 1,
+      "axis": "interaction_energy",
+      "prompt_zh": "在一个尚未形成结论的讨论里，你更自然地：",
+      "choice_a": {
+        "pole": "external_activation",
+        "text_zh": "先把半成品想法说出来，借来回交流逐步成形。"
+      },
+      "choice_b": {
+        "pole": "internal_settling",
+        "text_zh": "先在心里或纸上整理出轮廓，再加入交流。"
+      }
+    },
+    {
+      "id": 2,
+      "axis": "interaction_energy",
+      "prompt_zh": "连续几天密集协作后，突然空出半天，你通常更想：",
+      "choice_a": {
+        "pole": "external_activation",
+        "text_zh": "找熟悉的人轻松聊聊或一起做点事。"
+      },
+      "choice_b": {
+        "pole": "internal_settling",
+        "text_zh": "减少输入，留一段不被打扰的独处时间。"
+      }
+    },
+    {
+      "id": 3,
+      "axis": "interaction_energy",
+      "prompt_zh": "碰到让你兴奋的新发现时，你通常先：",
+      "choice_a": {
+        "pole": "external_activation",
+        "text_zh": "很快分享，在他人的回应中继续理解。"
+      },
+      "choice_b": {
+        "pole": "internal_settling",
+        "text_zh": "先自己消化，形成较完整看法后再分享。"
+      }
+    },
+    {
+      "id": 4,
+      "axis": "information_focus",
+      "prompt_zh": "接手一个不熟悉的任务时，你更自然地先：",
+      "choice_a": {
+        "pole": "concrete_evidence",
+        "text_zh": "看现有数据、具体案例和实际流程。"
+      },
+      "choice_b": {
+        "pole": "pattern_possibilities",
+        "text_zh": "画出整体关系，提出可能的解释和方向。"
+      }
+    },
+    {
+      "id": 5,
+      "axis": "information_focus",
+      "prompt_zh": "听到一个还很模糊的新点子时，你更常先追问：",
+      "choice_a": {
+        "pole": "concrete_evidence",
+        "text_zh": "它具体怎样运作，第一步是什么。"
+      },
+      "choice_b": {
+        "pole": "pattern_possibilities",
+        "text_zh": "它可能打开哪些方向，还能与什么连接。"
+      }
+    },
+    {
+      "id": 6,
+      "axis": "information_focus",
+      "prompt_zh": "向别人解释新知识时，你更自然地：",
+      "choice_a": {
+        "pole": "concrete_evidence",
+        "text_zh": "多用具体案例和操作顺序。"
+      },
+      "choice_b": {
+        "pole": "pattern_possibilities",
+        "text_zh": "多用整体框架、类比和背后规律。"
+      }
+    },
+    {
+      "id": 7,
+      "axis": "decision_weighting",
+      "prompt_zh": "团队在两个都能达成目标的方案之间选择时，你更看重：",
+      "choice_a": {
+        "pole": "principled_reasoning",
+        "text_zh": "是否有统一、可复用的评判标准。"
+      },
+      "choice_b": {
+        "pole": "value_awareness",
+        "text_zh": "是否照顾到相关人的核心关切与已有承诺。"
+      }
+    },
+    {
+      "id": 8,
+      "axis": "decision_weighting",
+      "prompt_zh": "两位同事因一个决定发生争执时，你通常会先：",
+      "choice_a": {
+        "pole": "principled_reasoning",
+        "text_zh": "拆清事实、推理过程和责任边界。"
+      },
+      "choice_b": {
+        "pole": "value_awareness",
+        "text_zh": "弄清双方重视什么、各自受到了怎样的影响。"
+      }
+    },
+    {
+      "id": 9,
+      "axis": "decision_weighting",
+      "prompt_zh": "一条规则总体有效，但在当前个案会让某人承担明显额外代价。你更倾向：",
+      "choice_a": {
+        "pole": "principled_reasoning",
+        "text_zh": "先保持规则一致，再设计补救。"
+      },
+      "choice_b": {
+        "pole": "value_awareness",
+        "text_zh": "先为当前处境调整规则，再为例外划清边界。"
+      }
+    },
+    {
+      "id": 10,
+      "axis": "action_organization",
+      "prompt_zh": "拿到一个一周后交付、过程完全开放的任务时，你更自然地：",
+      "choice_a": {
+        "pole": "planned_closure",
+        "text_zh": "尽早确定路径和检查点。"
+      },
+      "choice_b": {
+        "pole": "flexible_exploration",
+        "text_zh": "先保留几种路径，随着信息增加再收敛。"
+      }
+    },
+    {
+      "id": 11,
+      "axis": "action_organization",
+      "prompt_zh": "难得有一整天空闲时，哪种安排会让你更舒服？",
+      "choice_a": {
+        "pole": "planned_closure",
+        "text_zh": "先定下几件要做的事和大致时段。"
+      },
+      "choice_b": {
+        "pole": "flexible_exploration",
+        "text_zh": "只保留一个方向，到了当下再决定。"
+      }
+    },
+    {
+      "id": 12,
+      "axis": "action_organization",
+      "prompt_zh": "讨论已经得到几个可行方向、但证据还不完整时，你更愿意：",
+      "choice_a": {
+        "pole": "planned_closure",
+        "text_zh": "先选一个可执行方向并约定复盘点。"
+      },
+      "choice_b": {
+        "pole": "flexible_exploration",
+        "text_zh": "暂不锁定，让更多信息继续进入后再决定。"
+      }
+    }
+  ],
+  "boundaries": {
+    "independent_and_unofficial": true,
+    "not_a_type_or_diagnosis": true,
+    "not_for_high_impact_decisions": true,
+    "no_percentiles_or_statistical_confidence_intervals": true,
+    "four_letter_result_is_unofficial": true,
+    "not_an_official_mbti_result": true,
+    "disclaimer_zh": "这是一个非官方简单测试，结果来自 12 道原创题，仅供自我探索，不是心理诊断，也不用于高影响决策。"
+  }
+}
