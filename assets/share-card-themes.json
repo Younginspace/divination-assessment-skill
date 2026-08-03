@@ -1,0 +1,99 @@
+{
+  "schema_version": "1.0.0",
+  "brand_policy": {
+    "show_logo": false,
+    "show_product_name": false,
+    "allow_official_badge": false
+  },
+  "font_stack": "ui-sans-serif, -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif",
+  "templates": {
+    "type-preference": {
+      "name_zh": "极光性格",
+      "background_start": "#EEE9FF",
+      "background_end": "#D9F2FF",
+      "ink": "#211A3C",
+      "muted": "#655E79",
+      "accent": "#6C4EE3",
+      "accent_soft": "#FFFFFF",
+      "panel": "#FFFFFF",
+      "motif": "orbits"
+    },
+    "big-five": {
+      "name_zh": "编辑部数据",
+      "background_start": "#EDF4E8",
+      "background_end": "#F8F1E4",
+      "ink": "#1E2B25",
+      "muted": "#667068",
+      "accent": "#3E6A57",
+      "accent_soft": "#DDEBDD",
+      "panel": "#FFFEF9",
+      "motif": "grid"
+    },
+    "relationship": {
+      "name_zh": "暖色对话",
+      "background_start": "#FFE9E2",
+      "background_end": "#F5E8F2",
+      "ink": "#3C2026",
+      "muted": "#765D63",
+      "accent": "#C85A6A",
+      "accent_soft": "#FFF5F2",
+      "panel": "#FFFDFC",
+      "motif": "paired-arcs"
+    },
+    "oracle": {
+      "name_zh": "静夜金线",
+      "background_start": "#111426",
+      "background_end": "#26294A",
+      "ink": "#F1EBDD",
+      "muted": "#C7C2D4",
+      "accent": "#D6A653",
+      "accent_soft": "#343653",
+      "panel": "#1D2038",
+      "motif": "stars"
+    },
+    "bazi": {
+      "name_zh": "纸墨四柱",
+      "background_start": "#F5EBDD",
+      "background_end": "#E7D2B8",
+      "ink": "#2B211B",
+      "muted": "#75665A",
+      "accent": "#A43E32",
+      "accent_soft": "#F1DED2",
+      "panel": "#FFF9EF",
+      "motif": "seal"
+    },
+    "western": {
+      "name_zh": "深空星历",
+      "background_start": "#101A36",
+      "background_end": "#223B61",
+      "ink": "#F5FAFF",
+      "muted": "#B8C7D9",
+      "accent": "#72D8E8",
+      "accent_soft": "#213E5C",
+      "panel": "#172844",
+      "motif": "constellation"
+    },
+    "vedic": {
+      "name_zh": "靛蓝月宿",
+      "background_start": "#2C2351",
+      "background_end": "#5A315D",
+      "ink": "#FFF8ED",
+      "muted": "#D9CADD",
+      "accent": "#F4B955",
+      "accent_soft": "#4A315F",
+      "panel": "#392958",
+      "motif": "mandala"
+    },
+    "report-followup": {
+      "name_zh": "纸上批注",
+      "background_start": "#E7F1ED",
+      "background_end": "#F3E9D7",
+      "ink": "#20332F",
+      "muted": "#64746F",
+      "accent": "#34786B",
+      "accent_soft": "#DCECE7",
+      "panel": "#FFFEFA",
+      "motif": "margin-notes"
+    }
+  }
+}

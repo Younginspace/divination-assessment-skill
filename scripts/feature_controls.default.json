@@ -1,0 +1,45 @@
+{
+  "schema_version": "2.0.0",
+  "profile": "prototype-only-bundled-default",
+  "revision": "builtin-bounded-default-on-1",
+  "issued_at": "2026-07-30T00:00:00+08:00",
+  "expires_at": "2099-01-01T00:00:00+00:00",
+  "features": {
+    "oracle-reflection": {
+      "enabled": true,
+      "mode": "REFLECTION_ONLY",
+      "feature_version": "1.0.0",
+      "scopes": [
+        "yuanbao-public-cn"
+      ],
+      "reason": "默认提供单次随机联想与自我反思，不预测外部事件"
+    },
+    "chart-generation": {
+      "enabled": true,
+      "mode": "FACTS_ONLY",
+      "feature_version": "1.0.0",
+      "scopes": [
+        "yuanbao-public-cn"
+      ],
+      "reason": "默认提供经 allowlist 验证的确定性盘面事实，不开放预测"
+    },
+    "vedic-lite-generation": {
+      "enabled": true,
+      "mode": "VEDIC_LITE_FACTS_ONLY",
+      "feature_version": "1.0.0",
+      "scopes": [
+        "yuanbao-public-cn"
+      ],
+      "reason": "独立开放印度占星轻体验 Beta 的 D1 盘面事实，可由宿主单独熔断"
+    },
+    "traditional-report-interpretation": {
+      "enabled": true,
+      "mode": "SOURCE_BOUND",
+      "feature_version": "1.0.0",
+      "scopes": [
+        "yuanbao-public-cn"
+      ],
+      "reason": "默认只解释用户提供或可追溯的传统文化材料，不补造结论"
+    }
+  }
+}

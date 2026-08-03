@@ -1,0 +1,51 @@
+{
+  "schema_version": "1.0.0",
+  "profile": "bundled-offline-engines",
+  "engines": [
+    {
+      "status": "approved",
+      "name": "builtin-lunar-python-bazi",
+      "version": "1.4.8+wrapper.1",
+      "artifact_hash": "sha256:fd3325601648f5f795b10ce478de0d46331eb04829b487cf4c96cc5292e1316f",
+      "license": "MIT; vendored source and license included",
+      "supported_systems": [
+        "bazi"
+      ],
+      "approval_id": "BUNDLED-ENGINE-PIN-BAZI-2026-07-30",
+      "algorithm_review_id": "PROTOTYPE-GOLDEN-TESTS-REQUIRED-BEFORE-PRODUCTION",
+      "license_review_id": "MIT-NOTICE-BUNDLED-2026-07-30",
+      "deployment_review_id": "OFFLINE-STDLIB-VENDOR-2026-07-30",
+      "expires_at": "2099-01-01T00:00:00+00:00"
+    },
+    {
+      "status": "approved",
+      "name": "builtin-astronomy-engine-basic",
+      "version": "2.1.19+wrapper.1",
+      "artifact_hash": "sha256:132060c1b25e7968aa3f0f1798ced75530a1b4aecc52adb9d0c0dcd780b58e05",
+      "license": "MIT; vendored source and license included",
+      "supported_systems": [
+        "western"
+      ],
+      "approval_id": "BUNDLED-ENGINE-PIN-WESTERN-2026-07-30",
+      "algorithm_review_id": "BASIC-PLANETS-SIGNS-ASPECTS-NO-HOUSES",
+      "license_review_id": "MIT-NOTICE-BUNDLED-2026-07-30",
+      "deployment_review_id": "OFFLINE-STDLIB-VENDOR-2026-07-30",
+      "expires_at": "2099-01-01T00:00:00+00:00"
+    },
+    {
+      "status": "approved",
+      "name": "builtin-astronomy-engine-vedic-lite",
+      "version": "2.1.19+vedic-lite-beta.1",
+      "artifact_hash": "sha256:a77885ec3f36debbbdc054822c5d21dac70d303aa320978baece9cf7b6323e58",
+      "license": "MIT Astronomy Engine; original wrapper/formulas; vendored source and license included",
+      "supported_systems": [
+        "vedic"
+      ],
+      "approval_id": "BUNDLED-ENGINE-PIN-VEDIC-LITE-2026-07-30",
+      "algorithm_review_id": "BETA-D1-LAHIRI-LINEAR-GOLDEN-AND-BOUNDARY-TESTS",
+      "license_review_id": "MIT-ENGINE-ORIGINAL-WRAPPER-NO-SWISS-CODE-2026-07-30",
+      "deployment_review_id": "OFFLINE-STDLIB-VENDOR-INDEPENDENT-KILL-SWITCH-2026-07-30",
+      "expires_at": "2099-01-01T00:00:00+00:00"
+    }
+  ]
+}

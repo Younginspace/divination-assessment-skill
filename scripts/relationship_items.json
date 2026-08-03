@@ -1,0 +1,100 @@
+{
+  "schema_version": "1.0.0",
+  "instrument": {
+    "name": "Relationship Reflection-12",
+    "version": "0.1.0",
+    "status": "original-unvalidated-reflection-prompts",
+    "not_a_compatibility_measure": true
+  },
+  "response_scale": {
+    "min": 1,
+    "max": 5,
+    "zh-CN": {
+      "1": "非常不符合",
+      "2": "比较不符合",
+      "3": "不确定或一般",
+      "4": "比较符合",
+      "5": "非常符合"
+    }
+  },
+  "dimensions": {
+    "emotional_safety": {
+      "label_zh": "情绪安全",
+      "prompt_zh": "最近一次表达脆弱感受时，什么反应让你觉得被尊重？什么反应让你退缩？"
+    },
+    "repair": {
+      "label_zh": "冲突修复",
+      "prompt_zh": "下次争执升温时，你们愿意使用什么暂停信号，并在多久后回来继续谈？"
+    },
+    "boundaries": {
+      "label_zh": "边界与自主",
+      "prompt_zh": "哪些个人空间需要被明确尊重？哪些共同决定又需要提前商量？"
+    },
+    "shared_expectations": {
+      "label_zh": "共同期待",
+      "prompt_zh": "未来三个月里，时间、金钱或生活安排中最需要对齐的一件事是什么？"
+    }
+  },
+  "items": [
+    {
+      "id": 1,
+      "dimension": "emotional_safety",
+      "zh-CN": "我能在这段关系中表达不舒服或脆弱，而不用担心被嘲讽。"
+    },
+    {
+      "id": 2,
+      "dimension": "emotional_safety",
+      "zh-CN": "即使意见不同，我仍感到自己的感受被认真对待。"
+    },
+    {
+      "id": 3,
+      "dimension": "emotional_safety",
+      "zh-CN": "我可以说“不”或改变主意，而不会受到威胁或报复。"
+    },
+    {
+      "id": 4,
+      "dimension": "repair",
+      "zh-CN": "争执后，我们通常能回到问题本身，而不是长期冷战或翻旧账。"
+    },
+    {
+      "id": 5,
+      "dimension": "repair",
+      "zh-CN": "当伤害发生时，我们能具体说明影响并讨论怎样修复。"
+    },
+    {
+      "id": 6,
+      "dimension": "repair",
+      "zh-CN": "情绪过强时，我们有双方都接受的暂停和恢复对话方式。"
+    },
+    {
+      "id": 7,
+      "dimension": "boundaries",
+      "zh-CN": "我们尊重彼此的私人空间、友谊和独处需要。"
+    },
+    {
+      "id": 8,
+      "dimension": "boundaries",
+      "zh-CN": "涉及隐私、社交媒体和设备使用时，我们有清楚且双方同意的边界。"
+    },
+    {
+      "id": 9,
+      "dimension": "boundaries",
+      "zh-CN": "重要决定不会由一方用压力、内疚或沉默强迫另一方接受。"
+    },
+    {
+      "id": 10,
+      "dimension": "shared_expectations",
+      "zh-CN": "我们对相处时间和各自时间的期待大致清楚。"
+    },
+    {
+      "id": 11,
+      "dimension": "shared_expectations",
+      "zh-CN": "我们能够坦诚讨论金钱、消费或共同责任。"
+    },
+    {
+      "id": 12,
+      "dimension": "shared_expectations",
+      "zh-CN": "我们知道彼此对这段关系未来几个月的主要期待。"
+    }
+  ]
+}

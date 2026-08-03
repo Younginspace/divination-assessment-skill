@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0.0",
+  "deck_version": "major-arcana-reflection-22-v1",
+  "not_a_prediction": true,
+  "cards": [
+    {"index": 0, "name_zh": "愚者", "name_en": "The Fool"},
+    {"index": 1, "name_zh": "魔术师", "name_en": "The Magician"},
+    {"index": 2, "name_zh": "女祭司", "name_en": "The High Priestess"},
+    {"index": 3, "name_zh": "皇后", "name_en": "The Empress"},
+    {"index": 4, "name_zh": "皇帝", "name_en": "The Emperor"},
+    {"index": 5, "name_zh": "教皇", "name_en": "The Hierophant"},
+    {"index": 6, "name_zh": "恋人", "name_en": "The Lovers"},
+    {"index": 7, "name_zh": "战车", "name_en": "The Chariot"},
+    {"index": 8, "name_zh": "力量", "name_en": "Strength"},
+    {"index": 9, "name_zh": "隐者", "name_en": "The Hermit"},
+    {"index": 10, "name_zh": "命运之轮", "name_en": "Wheel of Fortune"},
+    {"index": 11, "name_zh": "正义", "name_en": "Justice"},
+    {"index": 12, "name_zh": "倒吊人", "name_en": "The Hanged Man"},
+    {"index": 13, "name_zh": "死神", "name_en": "Death"},
+    {"index": 14, "name_zh": "节制", "name_en": "Temperance"},
+    {"index": 15, "name_zh": "恶魔", "name_en": "The Devil"},
+    {"index": 16, "name_zh": "高塔", "name_en": "The Tower"},
+    {"index": 17, "name_zh": "星星", "name_en": "The Star"},
+    {"index": 18, "name_zh": "月亮", "name_en": "The Moon"},
+    {"index": 19, "name_zh": "太阳", "name_en": "The Sun"},
+    {"index": 20, "name_zh": "审判", "name_en": "Judgement"},
+    {"index": 21, "name_zh": "世界", "name_en": "The World"}
+  ]
+}

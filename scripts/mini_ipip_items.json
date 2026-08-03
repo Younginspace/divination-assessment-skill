@@ -1,0 +1,170 @@
+{
+  "schema_version": "1.0.0",
+  "instrument": {
+    "name": "Mini-IPIP-20",
+    "version": "donnellan-2006",
+    "source": "https://ipip.ori.org/MiniIPIPKey.htm",
+    "license_status": "IPIP items and scales are public domain",
+    "zh_cn_translation": "draft-0.1-unvalidated"
+  },
+  "response_scale": {
+    "min": 1,
+    "max": 5,
+    "en": {
+      "1": "Very inaccurate",
+      "2": "Moderately inaccurate",
+      "3": "Neither inaccurate nor accurate",
+      "4": "Moderately accurate",
+      "5": "Very accurate"
+    },
+    "zh-CN": {
+      "1": "非常不符合",
+      "2": "比较不符合",
+      "3": "不确定或一般",
+      "4": "比较符合",
+      "5": "非常符合"
+    }
+  },
+  "items": [
+    {
+      "id": 1,
+      "trait": "extraversion",
+      "reverse": false,
+      "en": "Am the life of the party.",
+      "zh_cn_draft": "我常常是聚会中活跃气氛的人。"
+    },
+    {
+      "id": 2,
+      "trait": "agreeableness",
+      "reverse": false,
+      "en": "Sympathize with others' feelings.",
+      "zh_cn_draft": "我能体会并同情他人的感受。"
+    },
+    {
+      "id": 3,
+      "trait": "conscientiousness",
+      "reverse": false,
+      "en": "Get chores done right away.",
+      "zh_cn_draft": "我会及时把该做的日常事务完成。"
+    },
+    {
+      "id": 4,
+      "trait": "neuroticism",
+      "reverse": false,
+      "en": "Have frequent mood swings.",
+      "zh_cn_draft": "我的情绪经常起伏。"
+    },
+    {
+      "id": 5,
+      "trait": "imagination",
+      "reverse": false,
+      "en": "Have a vivid imagination.",
+      "zh_cn_draft": "我有丰富而生动的想象力。"
+    },
+    {
+      "id": 6,
+      "trait": "extraversion",
+      "reverse": true,
+      "en": "Don't talk a lot.",
+      "zh_cn_draft": "我平时话不多。"
+    },
+    {
+      "id": 7,
+      "trait": "agreeableness",
+      "reverse": true,
+      "en": "Am not interested in other people's problems.",
+      "zh_cn_draft": "我对别人的困难不太感兴趣。"
+    },
+    {
+      "id": 8,
+      "trait": "conscientiousness",
+      "reverse": true,
+      "en": "Often forget to put things back in their proper place.",
+      "zh_cn_draft": "我常忘记把东西放回原位。"
+    },
+    {
+      "id": 9,
+      "trait": "neuroticism",
+      "reverse": true,
+      "en": "Am relaxed most of the time.",
+      "zh_cn_draft": "大多数时候我很放松。"
+    },
+    {
+      "id": 10,
+      "trait": "imagination",
+      "reverse": true,
+      "en": "Am not interested in abstract ideas.",
+      "zh_cn_draft": "我对抽象的想法不太感兴趣。"
+    },
+    {
+      "id": 11,
+      "trait": "extraversion",
+      "reverse": false,
+      "en": "Talk to a lot of different people at parties.",
+      "zh_cn_draft": "在聚会上，我会和许多不同的人交谈。"
+    },
+    {
+      "id": 12,
+      "trait": "agreeableness",
+      "reverse": false,
+      "en": "Feel others' emotions.",
+      "zh_cn_draft": "我能感受到他人的情绪。"
+    },
+    {
+      "id": 13,
+      "trait": "conscientiousness",
+      "reverse": false,
+      "en": "Like order.",
+      "zh_cn_draft": "我喜欢井然有序。"
+    },
+    {
+      "id": 14,
+      "trait": "neuroticism",
+      "reverse": false,
+      "en": "Get upset easily.",
+      "zh_cn_draft": "我很容易感到烦乱或不安。"
+    },
+    {
+      "id": 15,
+      "trait": "imagination",
+      "reverse": true,
+      "en": "Have difficulty understanding abstract ideas.",
+      "zh_cn_draft": "我很难理解抽象的想法。"
+    },
+    {
+      "id": 16,
+      "trait": "extraversion",
+      "reverse": true,
+      "en": "Keep in the background.",
+      "zh_cn_draft": "在人群中，我通常待在不显眼的位置。"
+    },
+    {
+      "id": 17,
+      "trait": "agreeableness",
+      "reverse": true,
+      "en": "Am not really interested in others.",
+      "zh_cn_draft": "我其实不太关心别人。"
+    },
+    {
+      "id": 18,
+      "trait": "conscientiousness",
+      "reverse": true,
+      "en": "Make a mess of things.",
+      "zh_cn_draft": "我常把事情或环境弄得一团乱。"
+    },
+    {
+      "id": 19,
+      "trait": "neuroticism",
+      "reverse": true,
+      "en": "Seldom feel blue.",
+      "zh_cn_draft": "我很少感到低落。"
+    },
+    {
+      "id": 20,
+      "trait": "imagination",
+      "reverse": true,
+      "en": "Do not have a good imagination.",
+      "zh_cn_draft": "我的想象力不太丰富。"
+    }
+  ]
+}
