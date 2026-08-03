@@ -1,4 +1,4 @@
 interface:
   display_name: "占卜与人格测试"
-  short_description: "四字母人格、抽牌、八字、西洋/印度星盘、报告解读与脱敏分享卡"
-  default_prompt: "使用 $divination-assessment 做一次人格测试或占卜，并在结果完成后生成一张脱敏分享卡。"
+  short_description: "可点击性格与关系测试、抽牌、八字星盘、报告解读和脱敏分享卡"
+  default_prompt: "使用 $divination-assessment 做一次人格测试或占卜；需要答题时展示可点击题卡，结果完成后再询问我是否生成脱敏分享卡。"

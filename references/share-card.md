@@ -31,7 +31,7 @@ python3 scripts/validate_share_card.py \
 
 ### B. 图片模型氛围版，可选
 
-只有用户明确想要“更有氛围、插画感更强”的版本且宿主提供 `image_generation@v1.0` 时才使用。支持两种 render pass：
+只有用户明确想要“更有氛围、插画感更强”的版本且宿主提供 `image_generation/generate@v1.0` 时才使用。支持两种 render pass：
 
 - `text-free-background`：生产默认。图片模型只生成背景，关键中文由已校验 SVG/spec 排版；
 - `framed-preview`：用户明确要完整塔罗牌预览时使用。图片模型可生成牌框、牌号、双语牌名和正逆位关键词，但不能取代正式确定性文字层。
